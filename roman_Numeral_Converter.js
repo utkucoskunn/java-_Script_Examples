@@ -1,6 +1,8 @@
-// Convert number to roman numerals
+/*Convert the given number into a roman numeral.
 
-//Create object mapping relevant numbers to roman symbol equivalent
+All roman numerals answers should be provided in upper-case.*/
+
+
 function convertToRoman(num) {
   const romanSymbols = {
     1000: 'M',
@@ -18,25 +20,24 @@ function convertToRoman(num) {
     1: 'I'
   }
   
-  let temp = num; //temp variable to be modified to prevent mutation of num argument
-  let romanNum = []; //Array to hold each converted roman numeral
+  let temp = num; 
+  let romanNum = []; 
   
-  //A function to break down temp into thousand, hundreds, tens 
+   
   function breakNum(value) {
     temp -= Math.floor(temp/value) * value;
     return temp;
   }
   
-  //function to match each number to roman symbol and push to romanNum array
+
   function addRomanNum(value) {
-      romanNum.push(romanSymbols[value].repeat((temp/value) * 1)); //repeat used to indicate number of consecutive symbols (from 1-3)
+      romanNum.push(romanSymbols[value].repeat((temp/value) * 1)); 
   }
  
- //roman numeral conversion function
+
   function romanNumerals(value) {
-    let flag; //variable to hold appropriate 10/100/1000 (or other relevant) position.
+    let flag; 
     
-    //conditional statement to determine flag position
     if (value >= 1000) {flag = 1000;}
     else if (value >= 100) {
       if (value >= 900) {flag = 900;}
@@ -57,15 +58,15 @@ function convertToRoman(num) {
       else {flag = 1;}
     }
 
-    addRomanNum(flag); //convert number to roman equivalent using flag
-    temp = breakNum(flag); //modify temp to 'move' to next position (eg from thousandth to hundredth)
-    if (temp >= 1) { //recursive call until temp has been reduced to one i.e no more breakdowns needed
+    addRomanNum(flag); 
+    temp = breakNum(flag); 
+    if (temp >= 1) { 
        romanNumerals(temp);
     }
   }
   
-  romanNumerals(num); //call function on passed num arg. 
-  return romanNum.join("") //after recursive calls breaks when temp is < 1, join elements in romanNum array to get full roman numeral
+  romanNumerals(num); 
+  return romanNum.join("") 
 
  }
  
